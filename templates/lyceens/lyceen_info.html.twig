@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body>
+
+{% include 'Ateliers/includes/navbar.html.twig' %}
+
+     <h1>Atelier Information</h1>
+
+    <p>ID: {{ lyceen.id }}</p>
+    <p>Prenom: {{ lyceen.prénom }}</p>
+    <p>Nom: {{ lyceen.nom }}</p>
+    <p>email: {{ lyceen.email }}</p>
+    <p>telephone: {{ lyceen.telephone }}</p>
+    <p>Age: {{ lyceen.âge }}</p>
+
+</body>
+</html>
+
+
