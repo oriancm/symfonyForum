@@ -50,12 +50,31 @@
             <div id="sponsors" class="hidden ml-8">
                 <!-- Render your sponsors data here -->
             </div>
+
+            <!-- Métiers -->
+            <div class="flex items-center justify-between bg-white p-4 shadow-md rounded-md">
+                <span class="text-lg font-semibold">Métiers</span>
+                <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('metiers')">+</button>
+            </div>
+            <div id="metiers" class="hidden ml-8">
+                <!-- Render your metiers data here -->
+            </div>
         </div>
     </div>
 
     <script>
-        function toggleEntities(entityId) {
+        async function toggleEntities(entityId) {
             const entityDiv = document.getElementById(entityId);
+
+            if (entityDiv.classList.contains('hidden')) {
+                // Fetch content dynamically
+                const response = await fetch('/entites/ateliers');
+                const data = await response.json();
+
+                // Render the content in the corresponding entity div
+                entityDiv.innerHTML = data.ateliers;
+            }
+
             entityDiv.classList.toggle('hidden');
         }
     </script>

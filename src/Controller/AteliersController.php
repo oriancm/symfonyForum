@@ -23,4 +23,26 @@ class AteliersController extends AbstractController
 
     }
 
+    #[Route('/entites/ateliers', name: 'indexAteliers')]
+    public function entitesIndex(entityManagerInterface $entityManagerInterface): JsonResponse
+    {
+//        $repoAteliers = $entityManagerInterface->getRepository(Ateliers::class);
+//        $ateliers = $repoAteliers->findAll();
+//
+//        // Convert entities to array or use a serializer if needed
+//        $ateliersArray = [];
+//
+//        foreach ($ateliers as $atelier) {
+//            $ateliersArray[] = [
+//                // Map your entity properties to the array
+//                'property1' => $atelier->getProperty1(),
+//                'property2' => $atelier->getProperty2(),
+//                // ...
+//            ];
+//        }
+
+//        return new JsonResponse(['ateliers' => $ateliersArray]);
+        return new JsonResponse(['ateliers' => 'aaaa']);
+    }
+
 }
