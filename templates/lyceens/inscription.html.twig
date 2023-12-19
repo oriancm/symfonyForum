@@ -1,19 +1,50 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Document</title>
-</head>
-<body>
-
-{% include 'Ateliers/includes/navbar.html.twig' %}
-
-
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-gray-100">
+        {% include 'Ateliers/includes/navbar.html.twig' %}
+        {# templates/lyceens/inscription.html.twig #}
+        {# <h1>Lyceen Registration</h1> #}
+            <div class="bg-white flex justify-center items-center shadow-2xl w-96 mx-auto rounded-3xl py-8 mt-10"> {{ form_start(form) }}
+            <div class="mb-4">
+                {{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'block text-sm font-bold mb-2' }}
+                ) }}           
+                {{ form_widget(form.nom, {'attr': {'class': 'border p-2 w-full' }}
+                ) }}                                          
+            </div>
+            <div class="mb-4">
+                {{ form_label(form.prenom, 'Prénom', {'label_attr': {'class': 'block text-sm font-bold mb-2' }}
+                ) }}                                                    
+                {{ form_widget(form.prenom, {'attr': {'class': 'border p-2 w-full' }}
+                ) }}                                         
+            </div>
+            <div class="mb-4">
+                {{ form_label(form.email, 'Email', {'label_attr': {'class': 'block text-sm font-bold mb-2' }}
+                ) }}          
+                {{ form_widget(form.email, {'attr': {'class': 'border p-2 w-full' }}
+                ) }}        
+            </div>
+            <div class="mb-4">
+                {{ form_label(form.age, 'Âge', {'label_attr': {'class': 'block text-sm font-bold mb-2' }}
+                ) }}         
+                {{ form_widget(form.age, {'attr': {'class': 'border p-2 w-full' }}
+                ) }}         
+            </div>
+            <div class="mb-4">
+                {{ form_label(form.telephone, 'Numéro de télephone', {'label_attr': {'class': 'block text-sm font-bold mb-2' }}
+                ) }}         
+                {{ form_widget(form.telephone, {'attr': {'class': 'border p-2 w-full' }}
+                ) }}         
+            </div>
+            <div class="flex justify-center">
+            {{ form_widget(form.submit,  {'attr': {'class': 'border-2 btn btn-primary rounded-lg w-32 h-10 bg-black text-white hover:bg-white hover:border-black hover:text-black'}}) }}
+            {{ form_end(form) }}
+            </div>
+        </div>
+    </body>
 </html>
-
-

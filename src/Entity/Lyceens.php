@@ -23,10 +23,10 @@ class Lyceens
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $prénom = null;
+    private ?string $prenom = null;
 
     #[ORM\Column]
-    private ?int $âge = null;
+    private ?int $age = null;
 
     public function getId(): ?int
     {
@@ -69,26 +69,26 @@ class Lyceens
         return $this;
     }
 
-    public function getPrénom(): ?string
+    public function getPrenom(): ?string
     {
-        return $this->prénom;
+        return $this->prenom;
     }
 
-    public function setPrénom(string $prénom): static
+    public function setPrenom(string $prenom): static
     {
-        $this->prénom = $prénom;
+        $this->prenom = $prenom;
 
         return $this;
     }
 
-    public function getâge(): ?int
+    public function getAge(): ?int
     {
-        return $this->âge;
+        return $this->age;
     }
 
-    public function setâge(int $âge): static
+    public function setAge(int $age): static
     {
-        $this->âge = $âge;
+        $this->age = $age;
 
         return $this;
     }
