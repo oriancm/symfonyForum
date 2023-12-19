@@ -25,6 +25,12 @@ class Lyceens
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $lycee = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $section = null;
+
     #[ORM\Column]
     private ?int $age = null;
 
@@ -77,6 +83,28 @@ class Lyceens
     public function setPrenom(string $prenom): static
     {
         $this->prenom = $prenom;
+
+        return $this;
+    }
+    public function getLycee(): ?string
+    {
+        return $this->lycee;
+    }
+
+    public function setLycee(string $lycee): static
+    {
+        $this->lycee = $lycee;
+
+        return $this;
+    }
+    public function getSection(): ?string
+    {
+        return $this->section;
+    }
+
+    public function setSection(string $section): static
+    {
+        $this->section = $section;
 
         return $this;
     }

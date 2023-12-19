@@ -20,8 +20,16 @@ class Ateliers
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $secteur_id = null;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $salle_id = null;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $metier_id = null;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $ressource_id = null;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $forum_id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $heure_depart = null;
@@ -70,6 +78,50 @@ class Ateliers
     public function setSecteurId(int $secteur_id): static
     {
         $this->secteur_id = $secteur_id;
+
+        return $this;
+    }
+    public function getSalleId(): ?int
+    {
+        return $this->salle_id;
+    }
+
+    public function setSalleId(int $salle_id): static
+    {
+        $this->salle_id = $salle_id;
+
+        return $this;
+    }
+    public function getMetierId(): ?int
+    {
+        return $this->metier_id;
+    }
+
+    public function setMetierId(int $metier_id): static
+    {
+        $this->metier_id = $metier_id;
+
+        return $this;
+    }
+    public function getRessourceId(): ?int
+    {
+        return $this->ressource_id;
+    }
+
+    public function setRessourceId(int $ressource_id): static
+    {
+        $this->ressource_id = $ressource_id;
+
+        return $this;
+    }
+    public function getForumId(): ?int
+    {
+        return $this->forum_id;
+    }
+
+    public function setForumId(int $forum_id): static
+    {
+        $this->forum_id = $forum_id;
 
         return $this;
     }

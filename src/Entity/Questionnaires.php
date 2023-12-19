@@ -23,6 +23,9 @@ class Questionnaires
     #[ORM\Column(type: Types::TEXT)]
     private ?string $réponse = null;
 
+    #[ORM\Column(type: Types::BINARY)]
+    private ?string $ouverte = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -67,6 +70,17 @@ class Questionnaires
     public function setRéponse(string $réponse): static
     {
         $this->réponse = $réponse;
+
+        return $this;
+    }
+    public function getOuverte(): ?string
+    {
+        return $this->ouverte;
+    }
+
+    public function setOuverte(string $ouverte): static
+    {
+        $this->$ouverte = $ouverte;
 
         return $this;
     }

@@ -19,6 +19,7 @@ class LyceenType extends AbstractType
             ->add('email', TextType::class)
             ->add('age', IntegerType::class)
             ->add('telephone', TextType::class)
+            ->add('lycee', TextType::class)
             ->add('submit', SubmitType::class, ['label' => 'Envoyer']);
 
     }

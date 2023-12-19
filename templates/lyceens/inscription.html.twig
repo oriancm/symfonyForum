@@ -10,32 +10,38 @@
         {% include 'Ateliers/includes/navbar.html.twig' %}
         {# templates/lyceens/inscription.html.twig #}
         {# <h1>Lyceen Registration</h1> #}
-            <div class="bg-white flex justify-center items-center shadow-2xl w-96 mx-auto rounded-3xl py-8 mt-10"> {{ form_start(form) }}
-            <div class="mb-4">
+            <div class="bg-white flex justify-center items-center shadow-2xl w-96 mx-auto rounded-3xl py-5 mt-5"> {{ form_start(form) }}
+            <div class="mb-3">
                 {{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'block text-sm font-bold mb-2' }}
                 ) }}           
                 {{ form_widget(form.nom, {'attr': {'class': 'border p-2 w-full' }}
                 ) }}                                          
             </div>
-            <div class="mb-4">
+            <div class="mb-3">
                 {{ form_label(form.prenom, 'Prénom', {'label_attr': {'class': 'block text-sm font-bold mb-2' }}
                 ) }}                                                    
                 {{ form_widget(form.prenom, {'attr': {'class': 'border p-2 w-full' }}
                 ) }}                                         
             </div>
-            <div class="mb-4">
-                {{ form_label(form.email, 'Email', {'label_attr': {'class': 'block text-sm font-bold mb-2' }}
-                ) }}          
-                {{ form_widget(form.email, {'attr': {'class': 'border p-2 w-full' }}
-                ) }}        
-            </div>
-            <div class="mb-4">
+            <div class="mb-3">
                 {{ form_label(form.age, 'Âge', {'label_attr': {'class': 'block text-sm font-bold mb-2' }}
                 ) }}         
                 {{ form_widget(form.age, {'attr': {'class': 'border p-2 w-full' }}
                 ) }}         
             </div>
-            <div class="mb-4">
+            <div class="mb-3">
+                {{ form_label(form.lycee, 'Lycée', {'label_attr': {'class': 'block text-sm font-bold mb-2' }}
+                ) }}         
+                {{ form_widget(form.lycee, {'attr': {'class': 'border p-2 w-full' }}
+                ) }}         
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.email, 'Email', {'label_attr': {'class': 'block text-sm font-bold mb-2' }}
+                ) }}          
+                {{ form_widget(form.email, {'attr': {'class': 'border p-2 w-full' }}
+                ) }}        
+            </div>
+            <div class="mb-3">
                 {{ form_label(form.telephone, 'Numéro de télephone', {'label_attr': {'class': 'block text-sm font-bold mb-2' }}
                 ) }}         
                 {{ form_widget(form.telephone, {'attr': {'class': 'border p-2 w-full' }}

@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\InscriptionsRepository;
+use App\Repository\AtelierMétierRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: InscriptionsRepository::class)]
-class Inscriptions
+#[ORM\Entity(repositoryClass: AtelierMétierRepository::class)]
+class AtelierMétier
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,7 +17,7 @@ class Inscriptions
     private ?int $atelier_id = null;
 
     #[ORM\Column]
-    private ?int $lyceen_id = null;
+    private ?int $metier_id = null;
 
     public function getId(): ?int
     {
@@ -43,14 +43,14 @@ class Inscriptions
         return $this;
     }
 
-    public function getLyceenId(): ?int
+    public function getMetierId(): ?int
     {
-        return $this->lyceen_id;
+        return $this->metier_id;
     }
 
-    public function setLyceenId(int $lyceen_id): static
+    public function setMetierId(int $metier_id): static
     {
-        $this->lyceen_id = $lyceen_id;
+        $this->metier_id = $metier_id;
 
         return $this;
     }
