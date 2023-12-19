@@ -23,6 +23,9 @@ class Sponsors
     #[ORM\Column(length: 255)]
     private ?string $url_redirection = null;
 
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $forum_id = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -67,6 +70,17 @@ class Sponsors
     public function setUrlRedirection(string $url_redirection): static
     {
         $this->url_redirection = $url_redirection;
+
+        return $this;
+    }
+    public function getForumId(): ?string
+    {
+        return $this->forum_id;
+    }
+
+    public function setForumId(int $forum_id): static
+    {
+        $this->forum_id = $forum_id;
 
         return $this;
     }

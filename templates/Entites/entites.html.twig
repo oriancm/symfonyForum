@@ -13,7 +13,6 @@
 
     <div class="container mx-auto">
         <h1 class="text-2xl font-bold mb-4">Entités</h1>
-
         <div class="space-y-4">
             <!-- Ateliers -->
             <div class="flex items-center justify-between bg-white p-4 shadow-md rounded-md">
@@ -21,7 +20,26 @@
                 <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('ateliers')">+</button>
             </div>
             <div id="ateliers" class="hidden ml-8">
-                <!-- Render your ateliers data here -->
+                {# <table>
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Logo</th>
+                            <th>URL Redirection</th>
+                            <th>Forum ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sponsor in sponsors %}
+                            <tr>
+                                <td>{{ sponsor.getNom() }}</td>
+                                <td>{{ sponsor.getLogo() }}</td>
+                                <td>{{ sponsor.getUrlRedirection() }}</td>
+                                <td>{{ sponsor.getForumId() }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table> #}
             </div>
 
             <!-- Intervenants -->
@@ -64,19 +82,19 @@
 
     <script>
         async function toggleEntities(entityId) {
-            const entityDiv = document.getElementById(entityId);
+        const entityDiv = document.getElementById(entityId);
 
-            if (entityDiv.classList.contains('hidden')) {
-                // Fetch content dynamically
-                const response = await fetch('/entites/ateliers');
-                const data = await response.json();
+        if (entityDiv.classList.contains('hidden')) {
+            // Fetch content dynamically
+            const response = await fetch(`/entites/${entityId}`);
+            const data = await response.json();
 
-                // Render the content in the corresponding entity div
-                entityDiv.innerHTML = data.ateliers;
-            }
-
-            entityDiv.classList.toggle('hidden');
+            // Render the content in the corresponding entity div
+            entityDiv.innerHTML = data[entityId];
         }
+
+        entityDiv.classList.toggle('hidden');
+    }
     </script>
 </main>
 </body>

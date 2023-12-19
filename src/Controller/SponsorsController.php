@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SponsorsController extends AbstractController
 {
-    #[Route('/sponsors', name: 'app_sponsors')]
+    #[Route('/sponsors/add', name: 'app_sponsors')]
     public function createSponsor(Request $request, EntityManagerInterface $entityManager): Response
     {
         // Get values from request parameters or form data
