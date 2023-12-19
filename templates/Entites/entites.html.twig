@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entity Display</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+{% include 'includes/navbar.html.twig' %}
+
+<div class="container mx-auto">
+    <h1 class="text-2xl font-bold mb-4">Entités</h1>
+
+    <div class="space-y-4">
+        <!-- Ateliers -->
+        <div class="flex items-center justify-between bg-white p-4 shadow-md rounded-md">
+            <span class="text-lg font-semibold">Ateliers</span>
+            <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('ateliers')">+</button>
+        </div>
+        <div id="ateliers" class="hidden ml-8">
+            <!-- Render your ateliers data here -->
+        </div>
+
+        <!-- Intervenants -->
+        <div class="flex items-center justify-between bg-white p-4 shadow-md rounded-md">
+            <span class="text-lg font-semibold">Intervenants</span>
+            <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('intervenants')">+</button>
+        </div>
+        <div id="intervenants" class="hidden ml-8">
+            <!-- Render your intervenants data here -->
+        </div>
+
+        <!-- Lycéens -->
+        <div class="flex items-center justify-between bg-white p-4 shadow-md rounded-md">
+            <span class="text-lg font-semibold">Lycéens</span>
+            <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('lyceens')">+</button>
+        </div>
+        <div id="lyceens" class="hidden ml-8">
+            <!-- Render your lycéens data here -->
+        </div>
+
+        <!-- Sponsors -->
+        <div class="flex items-center justify-between bg-white p-4 shadow-md rounded-md">
+            <span class="text-lg font-semibold">Sponsors</span>
+            <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('sponsors')">+</button>
+        </div>
+        <div id="sponsors" class="hidden ml-8">
+            <!-- Render your sponsors data here -->
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleEntities(entityId) {
+        const entityDiv = document.getElementById(entityId);
+        entityDiv.classList.toggle('hidden');
+    }
+</script>
+</body>
+</html>

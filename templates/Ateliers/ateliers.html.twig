@@ -10,8 +10,13 @@
 </head>
 <body>
 
-{% include 'Ateliers/includes/navbar.html.twig' %}
+{% include 'includes/navbar.html.twig' %}
 
+     <h1>Atelier Information</h1>
+
+    <p>ID: {{ atelier.id }}</p>
+    <p>Nom: {{ atelier.nom }}</p>
+    <p>Description: {{ atelier.description }}</p>
 
 </body>
 </html>
