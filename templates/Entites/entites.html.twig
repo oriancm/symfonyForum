@@ -69,6 +69,21 @@
     </div>
 
     <script>
+        function deleteEntity(entityId, entity) {
+        // Fetch content dynamically
+        fetch(`/${entity}/delete/${entityId}`, {
+            method: 'DELETE',
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message);            
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+        toggleEntities(entityId)
+        }
+
         async function toggleEntities(entityId) {
         const entityDiv = document.getElementById(entityId);
 
@@ -94,25 +109,28 @@
             const tableHTML = `
             <table class="min-w-full bg-white border border-gray-300">
                 <thead>
-                    <tr class="bg-gray-100">
+                    <tr class="bg-gray-100 flex justify-around">
                         ${Object.values(entityValues[entityId]).map((columnName, index) => `
-                            <th class="py-2 px-4 border-b">${columnName}</th>
+                            <th class="my-3 px-4">${columnName}</th>
                         `).join('')}
+                        <th class="my-2 px-4">Edit</th>
+                        <th class="my-2 px-4">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     ${data[entityId].map(entity => `
-                        <tr class="hover:bg-gray-50">
+                        <tr class="hover:bg-gray-50 flex justify-around">
                             ${Object.keys(entityValues[entityId]).map(index => `
-                                <td class="py-2 px-4 border-b">${entity[entityValues[entityId][index]]}</td>
+                                <td id="${entity[entityValues[entityId][1]]}" class="my-5 px-4">${entity[entityValues[entityId][index]]}</td>
                             `).join('')}
+                            <td class="button-60 my-3 px-4">Edit</td>
+                            <td class="button-60 my-3 px-4" onclick="deleteEntity(${entity[entityValues[entityId][1]]}, '${entityId}')">Delete</td>
                         </tr>
                     `).join('')}
                 </tbody>
             </table>
             `;
 
-            // Render the content in the corresponding entity div
             entityDiv.innerHTML = tableHTML;
         }
 
@@ -122,3 +140,49 @@
 </main>
 </body>
 </html>
+
+<style>
+
+/* CSS */
+.button-60 {
+  align-items: center;
+  appearance: none;
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: .375em;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: #363636;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 1rem;
+  height: 2.5em;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+
+.button-60:active {
+  border-color: #4a4a4a;
+  outline: 0;
+}
+
+.button-60:focus {
+  border-color: #485fc7;
+  outline: 0;
+}
+
+.button-60:hover {
+  border-color: #b5b5b5;
+}
+
+.button-60:focus:not(:active) {
+  box-shadow: rgba(72, 95, 199, .25) 0 0 0 .125em;
+}
+
+</style>
