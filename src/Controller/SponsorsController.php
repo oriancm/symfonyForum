@@ -47,4 +47,25 @@ class SponsorsController extends AbstractController
 
         return new Response('Check out this great sponsor: ' . $sponsor->getNom());
     }
+
+    #[Route('/entites/sponsors', name: 'indexSponsors')]
+
+    public function getSponsors(EntityManagerInterface $entityManager): JsonResponse
+    {
+        $sponsors = $entityManager->getRepository(Sponsors::class)->findAll();
+
+        $sponsorsData = [];
+        foreach ($sponsors as $sponsor) {
+            $sponsorsData[] = [
+                'id' => $sponsor->getId(),
+                'nom' => $sponsor->getNom(),
+                'url redirection' => str_replace(['\/', '\\'], ['', ''], $sponsor->getUrlRedirection()),
+                'Forum Id' => $sponsor->getForumId(),
+                'logo' => $sponsor->getLogo(),
+            ];
+        }
+
+        return new JsonResponse(['sponsors' => $sponsorsData]);
+
+    }
 }

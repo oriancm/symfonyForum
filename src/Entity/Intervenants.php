@@ -25,8 +25,7 @@ class Intervenants
     #[ORM\Column(length: 255)]
     private ?string $prénom = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $entreprise = null;
+
 
     public function getId(): ?int
     {
@@ -88,15 +87,5 @@ class Intervenants
         return $this;
     }
 
-    public function getEntreprise(): ?string
-    {
-        return $this->entreprise;
-    }
 
-    public function setEntreprise(?string $entreprise): static
-    {
-        $this->entreprise = $entreprise;
-
-        return $this;
-    }
 }
