@@ -19,7 +19,7 @@
                 <span class="text-lg font-semibold">Ateliers</span>
                 <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('ateliers')">+</button>
             </div>
-            <div id="ateliers" class="hidden">
+            <div id="ateliers" class="hidden entity">
 
             </div>
 
@@ -28,7 +28,7 @@
                 <span class="text-lg font-semibold">Intervenants</span>
                 <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('intervenants')">+</button>
             </div>
-            <div id="intervenants" class="hidden">
+            <div id="intervenants" class="hidden entity">
                 <!-- Render your intervenants data here -->
             </div>
 
@@ -37,7 +37,7 @@
                 <span class="text-lg font-semibold">Lycéens</span>
                 <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('lyceens')">+</button>
             </div>
-            <div id="lyceens" class="hidden">
+            <div id="lyceens" class="hidden entity">
                 <!-- Render your lycéens data here -->
             </div>
 
@@ -46,7 +46,7 @@
                 <span class="text-lg font-semibold">Sponsors</span>
                 <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('sponsors')">+</button>
             </div>
-            <div id="sponsors" class="hidden">
+            <div id="sponsors" class="hidden entity">
                 <!-- Render your sponsors data here -->
             </div>
 
@@ -55,37 +55,33 @@
                 <span class="text-lg font-semibold">Métiers</span>
                 <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('metiers')">+</button>
             </div>
-            <div id="metiers" class="hidden">
+            <div id="metiers" class="hidden entity">
                 <!-- Render your metiers data here -->
             </div>
             <div class="flex items-center justify-between bg-white p-4 shadow-md rounded-md">
-                <span class="text-lg font-semibold">Forum</span>
+                <span class="text-lg font-semibold">Forums</span>
                 <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('forums')">+</button>
             </div>
-            <div id="forums" class="hidden">
+            <div id="forums" class="hidden entity">
                 <!-- Render your metiers data here -->
             </div>
         </div>
     </div>
 
     <script>
-        function deleteEntity(entityId, entity) {
-        // Fetch content dynamically
-        fetch(`/${entity}/delete/${entityId}`, {
-            method: 'DELETE',
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.message);            
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-        toggleEntities(entityId)
+        //Disable all the id fields from being edited
+        function disableIdInput(){
+            var entityDOM = document.getElementsByClassName("entity")
+            var entitesValues = []
+            for(entity of entityDOM){
+                if(!entity.classList.contains('hidden')){
+                    var entityTbody =  entity.firstElementChild.children[1]
+                    for(tr of entityTbody.children){
+                        tr.firstElementChild.firstElementChild.disabled = true
+                    }
+                }
+            }
         }
-
-        async function toggleEntities(entityId) {
-        const entityDiv = document.getElementById(entityId);
 
         const entityValues = {
             'forums': {
@@ -100,6 +96,69 @@
                 5: 'forum id'
             }
         }
+
+        function deleteEntity(entityId, entity) {
+        // Fetch content dynamically
+        fetch(`/${entity}/delete/${entityId}`, {
+            method: 'DELETE',
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message);            
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+        toggleEntities(entityId)
+        }     
+
+        function updateEntity(entityId, entity, elementId) {
+        
+        updatedData = []
+        // Fetch content dynamically
+        var tableDOM = document.getElementById(entity);
+        var tableValues = tableDOM.firstElementChild.children[1].children[parseInt(elementId)]
+        Array.from(tableValues.children).forEach(element => {
+            if (element.firstElementChild && element.firstElementChild.tagName) {
+                if (element.firstElementChild.tagName.toLowerCase() === 'input') {
+                    updatedData.push(element.firstElementChild.value);
+                } else {
+                    updatedData.push(null);
+                }
+            } else {
+                updatedData.push(null);
+            }
+        });
+        updatedData.splice(0, 1); // Remove the first element
+        updatedData.splice(-2);   // Remove the last two elements
+        var jsonString = JSON.stringify(updatedData);
+
+        console.log(jsonString)
+        fetch(`/${entity}/update/${entityId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: jsonString,
+        })
+        .then(response => {
+            console.log(response.json())
+        }
+        )
+        .then(data => {
+            console.log(data)
+        }
+        )
+        .catch(error => {
+            console.log(`HTTP error! Status: ${error}`);
+        });
+        }
+
+        async function toggleEntities(entityId) {
+        
+        const entityDiv = document.getElementById(entityId);
+
+        
 
         if (entityDiv.classList.contains('hidden')) {
             // Fetch content dynamically
@@ -118,12 +177,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    ${data[entityId].map(entity => `
-                        <tr class="hover:bg-gray-50 flex justify-around">
+                    
+                    ${data[entityId].map((entity, counter) => `
+                        <tr id=${counter} class="hover:bg-gray-50 flex justify-around">
                             ${Object.keys(entityValues[entityId]).map(index => `
-                                <td id="${entity[entityValues[entityId][1]]}" class="my-5 px-4">${entity[entityValues[entityId][index]]}</td>
+                                <td  id="${entity[entityValues[entityId][1]]}" class="my-5 px-4"><input type='text' value='${entity[entityValues[entityId][index]]}'></input></td>
                             `).join('')}
-                            <td class="button-60 my-3 px-4">Edit</td>
+                            <td class="button-60 my-3 px-4" onclick="updateEntity(${entity[entityValues[entityId][1]]}, '${entityId}', '${counter}')">Edit</td>
                             <td class="button-60 my-3 px-4" onclick="deleteEntity(${entity[entityValues[entityId][1]]}, '${entityId}')">Delete</td>
                         </tr>
                     `).join('')}
@@ -133,8 +193,9 @@
 
             entityDiv.innerHTML = tableHTML;
         }
-
         entityDiv.classList.toggle('hidden');
+        disableIdInput()
+
     }
     </script>
 </main>
@@ -142,7 +203,13 @@
 </html>
 
 <style>
+input{
+    background-color: transparent;
+}
 
+input::placeholder{
+    color: #000;
+}
 /* CSS */
 .button-60 {
   align-items: center;

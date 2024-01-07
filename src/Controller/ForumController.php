@@ -52,4 +52,28 @@ class ForumController extends AbstractController
 
         return new JsonResponse(['message' => 'Forum deleted successfully']);
     }
+    #[Route('/forums/update/{id}', name: 'deleteForum', methods: ['POST'])]
+
+    public function updateForum(EntityManagerInterface $entityManager, Request $request, int $id): JsonResponse
+    {
+        // $data = $request->getContent();
+
+
+        $forum = $entityManager->getRepository(Forum::class)->find($id);
+
+        if (!$forum) {
+            return new JsonResponse(['message' => 'Forum not found'], JsonResponse::HTTP_NOT_FOUND);
+        } else {
+            $forumsData[] = [
+                'id' => $forum->getId(),
+                'annee' => $forum->getAnnee(),
+            ];
+            $entityManager->flush();
+            return new JsonResponse(['message' => "Forum updated successfully", 'forum' => $forumsData]);
+
+        }
+
+
+
+    }
 }
