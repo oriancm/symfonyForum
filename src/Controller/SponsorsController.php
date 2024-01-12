@@ -34,19 +34,6 @@ class SponsorsController extends AbstractController
         return new Response('Saved new sponsor with id ' . $sponsor->getId());
     }
 
-    #[Route('/sponsors/{id}', name: 'sponsor')]
-    public function show(EntityManagerInterface $entityManager, int $id): Response
-    {
-        $sponsor = $entityManager->getRepository(Sponsors::class)->find($id);
-
-        if (!$sponsor) {
-            throw $this->createNotFoundException(
-                'No sponsors found for id ' . $id
-            );
-        }
-
-        return new Response('Check out this great sponsor: ' . $sponsor->getNom());
-    }
 
     #[Route('/entites/sponsors', name: 'indexSponsors')]
 
@@ -59,13 +46,45 @@ class SponsorsController extends AbstractController
             $sponsorsData[] = [
                 'id' => $sponsor->getId(),
                 'nom' => $sponsor->getNom(),
-                'url redirection' => str_replace(['\/', '\\'], ['', ''], $sponsor->getUrlRedirection()),
-                'Forum Id' => $sponsor->getForumId(),
                 'logo' => $sponsor->getLogo(),
+                'url redirection' => str_replace(['\/', '\\'], ['', ''], $sponsor->getUrlRedirection()),
+                'forum id' => $sponsor->getForumId(),
             ];
         }
 
         return new JsonResponse(['sponsors' => $sponsorsData]);
+    }
+
+    #[Route('/sponsors/update/{id}', name: 'updateSponsor', methods: ['POST'])]
+
+    public function updateForum(EntityManagerInterface $entityManager, Request $request, int $id): JsonResponse
+    {
+        $sponsor = $entityManager->getRepository(Sponsors::class)->find($id);
+
+        if (!$sponsor) {
+            return new JsonResponse(['message' => 'Forum not found'], JsonResponse::HTTP_NOT_FOUND);
+        } else {
+            // Data = données envoyés dans la requête post
+            $data = json_decode($request->getContent(), true);
+
+
+            if (isset($data[0]) && isset($data[1]) && isset($data[2]) && isset($data[3])) {
+                // On modifie notre instance avec les données envoyés par la requête
+                if (is_int(intval($data[3]))) {
+                    $sponsor->setNom($data[0]);
+                    $sponsor->setUrlRedirection($data[1]);
+                    $sponsor->setLogo(null);
+                    $sponsor->setForumId($data[3]);
+                    // On met à jour la bdd
+                    $entityManager->flush();
+                    return new JsonResponse(['message' => "UPDATED !", 'forum' => $data]);
+                } else {
+                    return new JsonResponse(['message' => "forum id has to be an integer", "data" => $data]);
+                }
+            } else {
+                return new JsonResponse(['message' => "Something went wrong", "data" => $data]);
+            }
+        }
 
     }
 }

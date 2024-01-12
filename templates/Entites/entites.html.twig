@@ -69,7 +69,22 @@
     </div>
 
     <script>
-        //Disable all the id fields from being edited
+
+        const entityValues = {
+            'forums': {
+                1: 'id',
+                2: 'annee'
+            },
+            'sponsors': {
+                1: 'id',
+                2: 'nom',
+                3: 'logo',
+                4: 'url redirection',
+                5: 'forum id'
+            }
+        }
+
+          //Disable all the id fields from being edited
         function disableIdInput(){
             var entityDOM = document.getElementsByClassName("entity")
             var entitesValues = []
@@ -80,20 +95,6 @@
                         tr.firstElementChild.firstElementChild.disabled = true
                     }
                 }
-            }
-        }
-
-        const entityValues = {
-            'forums': {
-                1: 'id',
-                2: 'annee'
-            },
-            'sponsors': {
-                1: 'id',
-                2: 'nom',
-                3: 'url redirection',
-                4: 'logo',
-                5: 'forum id'
             }
         }
 
@@ -129,8 +130,8 @@
                 updatedData.push(null);
             }
         });
-        updatedData.splice(0, 1); // Remove the first element
-        updatedData.splice(-2);   // Remove the last two elements
+        updatedData.splice(0, 1); // Remove the first element (id)
+        updatedData.splice(-2);   // Remove the last two elements (edit , delete)
         var jsonString = JSON.stringify(updatedData);
 
         console.log(jsonString)
@@ -142,7 +143,14 @@
         body: jsonString,
         })
         .then(response => {
-            console.log(response.json())
+            if(response.status != 200){
+                console.log(response.json())
+                //window.alert(`HTTP error! Status: ${response.status}`);
+            }
+            else{
+                console.log(response.json())
+                //window.alert("Data updated successfully")
+            }
         }
         )
         .then(data => {
@@ -150,15 +158,15 @@
         }
         )
         .catch(error => {
-            console.log(`HTTP error! Status: ${error}`);
+            window.alert(`HTTP error! Status: ${error}`);
         });
         }
+
+        
 
         async function toggleEntities(entityId) {
         
         const entityDiv = document.getElementById(entityId);
-
-        
 
         if (entityDiv.classList.contains('hidden')) {
             // Fetch content dynamically
@@ -177,11 +185,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
                     ${data[entityId].map((entity, counter) => `
                         <tr id=${counter} class="hover:bg-gray-50 flex justify-around">
                             ${Object.keys(entityValues[entityId]).map(index => `
-                                <td  id="${entity[entityValues[entityId][1]]}" class="my-5 px-4"><input type='text' value='${entity[entityValues[entityId][index]]}'></input></td>
+                                <td id="${entity[entityValues[entityId][1]]}" class="my-5 px-4">
+                                    <input  value='${entity[entityValues[entityId][index]]}'>
+                                </td>
                             `).join('')}
                             <td class="button-60 my-3 px-4" onclick="updateEntity(${entity[entityValues[entityId][1]]}, '${entityId}', '${counter}')">Edit</td>
                             <td class="button-60 my-3 px-4" onclick="deleteEntity(${entity[entityValues[entityId][1]]}, '${entityId}')">Delete</td>
@@ -197,6 +206,8 @@
         disableIdInput()
 
     }
+
+  
     </script>
 </main>
 </body>

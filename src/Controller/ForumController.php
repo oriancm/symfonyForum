@@ -52,28 +52,29 @@ class ForumController extends AbstractController
 
         return new JsonResponse(['message' => 'Forum deleted successfully']);
     }
-    #[Route('/forums/update/{id}', name: 'deleteForum', methods: ['POST'])]
+    #[Route('/forums/update/{id}', name: 'updateForum', methods: ['POST'])]
 
     public function updateForum(EntityManagerInterface $entityManager, Request $request, int $id): JsonResponse
     {
-        // $data = $request->getContent();
-
-
         $forum = $entityManager->getRepository(Forum::class)->find($id);
 
         if (!$forum) {
             return new JsonResponse(['message' => 'Forum not found'], JsonResponse::HTTP_NOT_FOUND);
         } else {
-            $forumsData[] = [
-                'id' => $forum->getId(),
-                'annee' => $forum->getAnnee(),
-            ];
-            $entityManager->flush();
-            return new JsonResponse(['message' => "Forum updated successfully", 'forum' => $forumsData]);
+            // Data = données envoyés dans la requête post
+            $data = json_decode($request->getContent(), true);
 
+            // Dans ce cas là, il n'a qu'une seule donnée pouvant être potentiellement modifié, par conséquent on prend $data[0]
+            if (isset($data[0])) {
+                // On modifie notre instance avec les données envoyés par la requête
+                $forum->setAnnee($data[0]);
+                // On met à jour la bdd
+                $entityManager->flush();
+                return new JsonResponse(['message' => "UPDATED !", 'forum' => $forum]);
+            } else {
+                return new JsonResponse(['message' => "Something went wrong"]);
+            }
         }
-
-
 
     }
 }
