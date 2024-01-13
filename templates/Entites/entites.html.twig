@@ -201,11 +201,18 @@
         .then(response => {
             if(response.status != 200){
                 console.log(response.json())
-                //window.alert(`HTTP error! Status: ${response.status}`);
+                //window.alert(`HTTP error! Status: ${response.status}`, `${response.message}`);
             }
             else{
-                console.log(response.json())
-                //window.alert("Data updated successfully")
+                response.json().then(data => {
+                if(data.error && data.error.xdebug_message){
+                    const errorMessage = data.error.xdebug_message;
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = errorMessage;
+                    const textContent = tempDiv.textContent || tempDiv.innerText;
+                    window.alert(textContent);
+                }
+                 });
             }
         }
         )

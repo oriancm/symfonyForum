@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\DBAL\Exception\DBALException;
+
 
 class AteliersController extends AbstractController
 {
@@ -81,15 +83,12 @@ class AteliersController extends AbstractController
         if (!$atelier) {
             return new JsonResponse(['message' => 'Forum not found'], JsonResponse::HTTP_NOT_FOUND);
         } else {
-            // Data = données envoyés dans la requête post
             $data = json_decode($request->getContent(), true);
 
-            // Dans ce cas là, il n'a qu'une seule donnée pouvant être potentiellement modifié, par conséquent on prend $data[0]
             if (
-                isset($data[0]) && isset($data[1]) && isset($data[2]) && isset($data[3]) && isset($data[4])
-                && isset($data[5]) && isset($data[6])
+                isset($data[0]) && isset($data[1]) && is_int(intval($data[2])) &&
+                is_int(intval($data[3])) && is_int(intval($data[4])) && isset($data[5]) && isset($data[6])
             ) {
-                // On modifie notre instance avec les données envoyés par la requête javascript
                 $atelier->setNom($data[0]);
                 $atelier->setDescription($data[1]);
                 $atelier->setSecteurId($data[2]);
@@ -97,15 +96,18 @@ class AteliersController extends AbstractController
                 $atelier->setRessourceId($data[4]);
                 $atelier->setForumId($data[5]);
                 $atelier->setHeureDepart(\DateTime::createFromFormat('d M Y H\hi', $data[6]));
+                try {
+                    $entityManager->flush();
+                } catch (\Exception $e) {
+                    return new JsonResponse(['error' => $e->getPrevious()]);
+                }
 
-                // On met à jour la bdd
-                $entityManager->flush();
-                return new JsonResponse(['message' => "UPDATED !", 'forum' => $data]);
+
+                return new JsonResponse(['message' => 'UPDATED!', 'forum' => $data]);
             } else {
-                return new JsonResponse(['message' => "Data missing", "data" => $data]);
+                return new JsonResponse(['message' => 'Data missing or cannot set string to integer values', 'data' => $data]);
             }
         }
-
     }
 
 

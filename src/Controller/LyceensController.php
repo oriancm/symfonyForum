@@ -79,13 +79,17 @@ class LyceensController extends AbstractController
                     $lyceens->setLogo(null);
                     $lyceens->setForumId($data[3]);
                     // On met à jour la bdd
-                    $entityManager->flush();
+                    try {
+                        $entityManager->flush();
+                    } catch (\Exception $e) {
+                        return new JsonResponse(['error' => $e->getPrevious()]);
+                    }
                     return new JsonResponse(['message' => "UPDATED !", 'forum' => $data]);
                 } else {
                     return new JsonResponse(['message' => "forum id has to be an integer", "data" => $data]);
                 }
             } else {
-                return new JsonResponse(['message' => "Something went wrong", "data" => $data]);
+                return new JsonResponse(['message' => "Missing data", "data" => $data]);
             }
         }
 
