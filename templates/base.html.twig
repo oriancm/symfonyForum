@@ -6,11 +6,39 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {% block stylesheets %}
         {% endblock %}
-
         {% block javascripts %}
         {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+        <header>
+            {% include 'includes/navbar.html.twig' %}
+        </header>
+        <body class="bg-gray-100">
+            <div class="container mx-auto mt-8">
+                <h1 class="text-2xl font-bold mb-4 text-center">Ateliers List</h1>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+                {% for atelier in ateliers %}
+                    <a href="{{ path('atelier', { 'id': atelier.id }) }}" class="button-class">
+                    <div class="bg-white border border-gray-300 p-4 rounded-md hover:shadow-md transition">
+                        <h2 class="text-lg font-semibold mb-2">{{ atelier.nom }}</h2>
+                        <p class="text-gray-600">{{ atelier.description }}</p>
+                        <p class="text-blue-700 mt-2 font-semibold">{{ atelier.heure_depart.date|date('d M Y H') }}h{{ atelier.heure_depart.date|date('i') }}</p>
+                    </div>
+                    </a>
+                {% endfor %}
+            </div>
+            </div>
+        </body>
+          <script>
+        // Fetch data from the Symfony controller
+        fetch('/entites/ateliers')
+            .then(response => response.json())
+            .then(data => {
+                // Log the data to the console
+                console.log(data);
+            })
+            .catch(error => {
+                // Handle errors
+                console.error('Error fetching data:', error);
+            });
+    </script>
 </html>

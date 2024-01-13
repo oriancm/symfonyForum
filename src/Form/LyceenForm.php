@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 
-class LyceenType extends AbstractType
+class LyceenForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -29,7 +29,8 @@ class LyceenType extends AbstractType
                     'Seconde' => 'Seconde',
                     'Première' => 'Première',
                     'Terminal' => 'Terminal',
-                ]])
+                ]
+            ])
             ->add('submit', SubmitType::class, ['label' => 'Envoyer']);
 
     }
