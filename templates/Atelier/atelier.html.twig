@@ -8,12 +8,15 @@
 </head>
 <body class="bg-gray-100 font-sans">
     {% include 'includes/navbar.html.twig' %}
+    <div class="mx-4">
+        <div class="max-w-screen-md mx-auto mx-4 mt-10 p-6 bg-white rounded-md shadow-md">
+            <h1 class="text-3xl font-bold mb-4 text-blue-700">Atelier Information</h1>
 
-    <div class="max-w-screen-md mx-auto mt-10 p-6 bg-white rounded-md shadow-md">
-        <h1 class="text-3xl font-bold mb-4 text-blue-700">Atelier Information</h1>
-
-        <p class="mb-2"><span class="font-semibold">Nom:</span> {{ atelier.nom }}</p>
-        <p class="mb-2"><span class="font-semibold">Description:</span> {{ atelier.description }}</p>
+            <p class="mb-2"><span class="font-semibold">Nom:</span> {{ atelier.nom }}</p>
+            <p class="mb-2"><span class="font-semibold">Description:</span> {{ atelier.description }}</p>
+            <p class="text-blue-700 mt-2 font-semibold">{{ atelier.heure_depart }}</p>
+        </div>
     </div>
+            
 </body>
 </html>

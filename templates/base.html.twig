@@ -21,7 +21,7 @@
                     <div class="bg-white border border-gray-300 p-4 rounded-md hover:shadow-md transition">
                         <h2 class="text-lg font-semibold mb-2">{{ atelier.nom }}</h2>
                         <p class="text-gray-600">{{ atelier.description }}</p>
-                        <p class="text-blue-700 mt-2 font-semibold">{{ atelier.heure_depart.date|date('d M Y H') }}h{{ atelier.heure_depart.date|date('i') }}</p>
+                        <p class="text-blue-700 mt-2 font-semibold">{{ atelier.heure_depart }}</p>
                     </div>
                     </a>
                 {% endfor %}

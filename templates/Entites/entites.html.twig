@@ -20,8 +20,32 @@
                 <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('ateliers')">+</button>
             </div>
             <div id="ateliers" class="hidden entity">
-
             </div>
+
+             <!-- Ateliers Intervenants -->
+            <div class="flex items-center justify-between bg-white p-4 shadow-md rounded-md">
+                <span class="text-lg font-semibold">Ateliers Intervenants</span>
+                <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('ateliers')">+</button>
+            </div>
+            <div id="ateliers-intervenants" class="hidden entity">
+            </div> 
+            
+            <!-- Ateliers Lyceens -->
+            <div class="flex items-center justify-between bg-white p-4 shadow-md rounded-md">
+                <span class="text-lg font-semibold">Ateliers Lyceens</span>
+                <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('ateliers')">+</button>
+            </div>
+            <div id="ateliers-lyceens" class="hidden entity">
+            </div>
+
+             <!-- Ateliers Métiers -->
+            <div class="flex items-center justify-between bg-white p-4 shadow-md rounded-md">
+                <span class="text-lg font-semibold">Ateliers Métiers</span>
+                <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('ateliers')">+</button>
+            </div>
+            <div id="ateliers-metiers" class="hidden entity">
+            </div>
+
 
             <!-- Intervenants -->
             <div class="flex items-center justify-between bg-white p-4 shadow-md rounded-md">
@@ -29,7 +53,6 @@
                 <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('intervenants')">+</button>
             </div>
             <div id="intervenants" class="hidden entity">
-                <!-- Render your intervenants data here -->
             </div>
 
             <!-- Lycéens -->
@@ -38,16 +61,6 @@
                 <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('lyceens')">+</button>
             </div>
             <div id="lyceens" class="hidden entity">
-                <!-- Render your lycéens data here -->
-            </div>
-
-            <!-- Sponsors -->
-            <div class="flex items-center justify-between bg-white p-4 shadow-md rounded-md">
-                <span class="text-lg font-semibold">Sponsors</span>
-                <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('sponsors')">+</button>
-            </div>
-            <div id="sponsors" class="hidden entity">
-                <!-- Render your sponsors data here -->
             </div>
 
             <!-- Métiers -->
@@ -56,14 +69,46 @@
                 <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('metiers')">+</button>
             </div>
             <div id="metiers" class="hidden entity">
-                <!-- Render your metiers data here -->
             </div>
+            
+             <!-- Questionnaires  -->
+            <div class="flex items-center justify-between bg-white p-4 shadow-md rounded-md">
+                <span class="text-lg font-semibold">Questionnaires</span>
+                <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('metiers')">+</button>
+            </div>
+            <div id="questionnaires" class="hidden entity">
+            </div>
+
+             <!-- Salles  -->
+            <div class="flex items-center justify-between bg-white p-4 shadow-md rounded-md">
+                <span class="text-lg font-semibold">Salles</span>
+                <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('metiers')">+</button>
+            </div>
+            <div id="salles" class="hidden entity">
+            </div>
+
+             <!-- Secteurs  -->
+            <div class="flex items-center justify-between bg-white p-4 shadow-md rounded-md">
+                <span class="text-lg font-semibold">Secteurs</span>
+                <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('sponsors')">+</button>
+            </div>
+            <div id="secteurs" class="hidden entity">
+            </div>
+
+             <!-- Sponsors -->
+            <div class="flex items-center justify-between bg-white p-4 shadow-md rounded-md">
+                <span class="text-lg font-semibold">Sponsors</span>
+                <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('sponsors')">+</button>
+            </div>
+            <div id="sponsors" class="hidden entity">
+            </div>
+
+            <!-- Forums -->
             <div class="flex items-center justify-between bg-white p-4 shadow-md rounded-md">
                 <span class="text-lg font-semibold">Forums</span>
                 <button class="text-blue-500 focus:outline-none" onclick="toggleEntities('forums')">+</button>
             </div>
             <div id="forums" class="hidden entity">
-                <!-- Render your metiers data here -->
             </div>
         </div>
     </div>
@@ -81,6 +126,17 @@
                 3: 'logo',
                 4: 'url redirection',
                 5: 'forum id'
+            },
+            'ateliers': {
+                1: 'id',
+                2: 'nom',
+                3: 'description',
+                4: 'secteur_id',
+                5: 'salle_id',
+                6: 'ressource_id',
+                7: 'forum_id',
+                8: 'heure_depart',
+
             }
         }
 
