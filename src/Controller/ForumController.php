@@ -69,7 +69,11 @@ class ForumController extends AbstractController
                 // On modifie notre instance avec les données envoyés par la requête
                 $forum->setAnnee($data[0]);
                 // On met à jour la bdd
-                $entityManager->flush();
+                try {
+                    $entityManager->flush();
+                } catch (\Exception $e) {
+                    return new JsonResponse(['error' => $e->getPrevious()]);
+                }
                 return new JsonResponse(['message' => "UPDATED !", 'forum' => $forum]);
             } else {
                 return new JsonResponse(['message' => "Something went wrong"]);

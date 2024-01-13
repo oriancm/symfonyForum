@@ -25,8 +25,6 @@ class Ateliers
     #[ORM\Column(type: Types::INTEGER)]
     private ?int $salle_id = null;
     #[ORM\Column(type: Types::INTEGER)]
-    private ?int $metier_id = null;
-    #[ORM\Column(type: Types::INTEGER)]
     private ?int $ressource_id = null;
     #[ORM\Column(type: Types::INTEGER)]
     private ?int $forum_id = null;
@@ -92,17 +90,7 @@ class Ateliers
 
         return $this;
     }
-    public function getMetierId(): ?int
-    {
-        return $this->metier_id;
-    }
 
-    public function setMetierId(int $metier_id): static
-    {
-        $this->metier_id = $metier_id;
-
-        return $this;
-    }
     public function getRessourceId(): ?int
     {
         return $this->ressource_id;
