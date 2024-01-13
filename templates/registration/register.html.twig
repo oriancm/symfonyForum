@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% include 'includes/navbar.html.twig' %}
+    <div class="max-w-md mx-auto mt-8 bg-white p-6 rounded-md shadow-md">
+        <h1 class="text-2xl font-semibold mb-6">Register</h1>
+
+        {{ form_errors(registrationForm) }}
+
+        {{ form_start(registrationForm, {'attr': {'class': 'mb-4'}}) }}
+        <div class="mb-4">
+            {{ form_row(registrationForm.email, {'attr': {'class': 'w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500'}}) }}
+        </div>
+        <div class="mb-4">
+            {{ form_row(registrationForm.plainPassword, {
+                'label': 'Password',
+                'attr': {'class': 'w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500'}
+            }) }}
+        </div>
+        <div class="mb-4">
+            {{ form_row(registrationForm.agreeTerms, {'label_attr': {'class': 'inline-flex items-center'}}) }}
+        </div>
+
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md focus:outline-none hover:bg-blue-600">Register</button>
+        {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}
